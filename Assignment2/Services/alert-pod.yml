@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: alert
+spec:
+  containers:
+  - name: alert
+    image: ccuni/alert-service-2021w
+    ports:
+    - containerPort: 31500

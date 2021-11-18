@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: collector
+  labels:
+    app: collector
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 31700
+    protocol: TCP
+    targetPort: 31700
+  selector:
+    app: collector
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: collector
+  labels:
+    app: collector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: collector
+  template:
+    metadata:
+      labels:
+        app: collector
+    spec:
+      containers:
+      - name: collector
+        image: europe-central2-docker.pkg.dev/microservicescloudcomputing/assignment2-repo/collector-microservice@sha256:6c61ced5e03f4d34f3e8b350cba17a956e7f4671b007968f44a44e17c6c0040b
+        ports:
+        - containerPort: 31700

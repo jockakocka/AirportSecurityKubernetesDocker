@@ -1,0 +1,54 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: airport-system-ingress-file
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: $2
+spec:
+  backend :
+    serviceName: cpanel
+    servicePort: 3800
+  rules:
+  - http:
+      paths:
+      - path: /camera(/|$)(.*)
+        backend:
+          serviceName: camera
+          servicePort: 80
+      - path: /alert(/|$)(.*)
+        backend:
+          serviceName: alert
+          servicePort: 80
+      - path: /section(/|$)(.*)
+        backend:
+          serviceName: section
+          servicePort: 80
+      - path: /face-recognition(/|$)(.*)
+        backend:
+          serviceName: face-recognition
+          servicePort: 80
+      - path: /image-analysis(/|$)(.*)
+        backend:
+          serviceName: image-analysis
+          servicePort: 80
+      - path: /collector(/}$)(.*)
+        backend:
+          serviceName: collector
+          servicePort: 31700
+      - path: /human-detection(/|$)(.*)
+        backend:
+          serviceName: human-detection
+          servicePort: 31600
+      - path: /cpanel/collector(/|$)(.*)
+        backend:
+          serviceName: collector
+          servicePort: 31700
+      - path: /cpanel/alert(/|$)(.*)
+        backend:
+          serviceName: alert
+          servicePort: 80
+      - path: /cpanel/section(/|$)(.*)
+        backend:
+          serviceName: section
+          servicePort: 80

@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cpanel
+  labels:
+    app: cpanel
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 3800
+    protocol: TCP
+    targetPort: 3800
+  selector:
+    app: cpanel
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpanel
+  labels:
+    app: cpanel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cpanel
+  template:
+    metadata:
+      labels:
+        app: cpanel
+    spec:
+      containers:
+      - name: cpanel
+        image: europe-central2-docker.pkg.dev/microservicescloudcomputing/assignment2-repo/cpanel-service@sha256:c15f2e2c5bd5082e0669e4e172c8682b8ffda7a3a937a8260b0bd5377abc987d
+        ports:
+        - containerPort: 3800

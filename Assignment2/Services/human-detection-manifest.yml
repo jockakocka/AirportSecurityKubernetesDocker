@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: human-detection
+  labels:
+    app: human-detection
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 31600
+    protocol: TCP
+    targetPort: 31600
+  selector:
+    app: human-detection
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: human-detection
+  labels:
+    app: human-detection
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: human-detection
+  template:
+    metadata:
+      labels:
+        app: human-detection
+    spec:
+      containers:
+      - name: human-detection
+        image: europe-central2-docker.pkg.dev/microservicescloudcomputing/assignment2-repo/human-detection@sha256:82e6d58c785ce676a75059bf8a439ec5e4bf70f615873005dfe6d18c968cb08d
+        ports:
+        - containerPort: 31600

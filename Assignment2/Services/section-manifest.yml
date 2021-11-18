@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: section
+  labels:
+    app: section
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: section
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: section
+  labels:
+    app: section
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: section
+  template:
+    metadata:
+      labels:
+        app: section
+    spec:
+      containers:
+      - name: section
+        image: ccuni/section-service-2021w
+        ports:
+        - containerPort: 31400

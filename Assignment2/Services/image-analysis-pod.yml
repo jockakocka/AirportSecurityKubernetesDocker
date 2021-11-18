@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: image-analysis
+spec:
+  containers:
+  - name: image-analysis
+    image: ccuni/image-analysis-service-2021w
+    ports:
+    - containerPort: 31200

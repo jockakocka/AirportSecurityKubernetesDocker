@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: face-recognition
+spec:
+  containers:
+  - name: face-recognition
+    image: ccuni/face-recognition-service-2021w
+    ports:
+    - containerPort: 31300

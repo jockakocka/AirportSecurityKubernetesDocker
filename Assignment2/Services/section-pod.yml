@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: section
+spec:
+  containers:
+  - name: section
+    image: ccuni/section-service-2021w
+    ports:
+    - containerPort: 31400
